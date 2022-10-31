@@ -1,0 +1,16 @@
+--- #Handlers
+- hosts: all
+  user: ubuntu
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Nginx
+      action: apt name=nginx state=present
+      notify: Restart NGINX
+    - name: Nginx-core
+      action: apt name=nginx-core state=present
+    - name: Nginx-common
+      action: apt name=nginx-common state=present
+  handlers:
+    - name: Restart NGINX
+      action: service name=nginx state=restarted

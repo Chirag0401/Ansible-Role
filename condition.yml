@@ -1,0 +1,12 @@
+--- #Condition Playbook
+- hosts: all
+  user: ubuntu
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install Nginx on Debian Host
+      command: apt install nginx -y
+      when: ansible_os_family=="Debian"
+    - name: install Httpd on RedHat Host
+      command: yum install httpd -y
+      when: ansible_os_family=="RedHat"

@@ -1,0 +1,7 @@
+--- #Master Playbook for Nginx
+- hosts: all
+  user: ubuntu
+  become: yes
+  connection: ssh
+  roles:
+    - nginx

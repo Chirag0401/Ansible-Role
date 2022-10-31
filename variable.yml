@@ -1,0 +1,16 @@
+--- #My Variable Playbook
+- hosts: all
+  user: ubuntu
+  become: yes
+  connection: ssh
+  vars:
+    - pkgname1: nginx
+      pkgname2: nginx-core
+      pkgname3: nginx-common
+  tasks:
+    - name: Nginx
+      action: apt name='{{pkgname1}}' state=absent
+    - name: Nginx-core
+      action: apt name='{{pkgname2}}' state=absent
+    - name: Nginx-common
+      action: apt name='{{pkgname3}}' state=absent

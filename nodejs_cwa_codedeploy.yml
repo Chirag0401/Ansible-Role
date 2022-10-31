@@ -1,0 +1,31 @@
+--- #Playbook for NodeJS and it's dependencies, Amazon CloudWatch Agent and Amazon CodeDeploy Agent
+
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Install NodeJS
+      shell: curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+      ignore_errors: True
+    - name: Install NodeJS, NPM and Ruby
+      apt: name={{item}} state=present
+      with_items:
+        - net-tools
+        - gcc
+        - make
+        - nodejs
+        - npm
+        - ruby-full
+    - name: Download and Install debian package for Amazon CloudWatch Agent
+      ansible.builtin.apt:
+        deb: https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb 
+    - name: Amazon CodeDeploy Install Script Download
+      ansible.builtin.get_url:
+        url: https://aws-codedeploy-us-west-2.s3.us-west-2.amazonaws.com/latest/install
+        dest: /home/ubuntu/
+        mode: '0777'
+    - name: Run CodeDeploy Install Script
+      shell: /home/ubuntu/install auto
+      args:
+        executable: bash

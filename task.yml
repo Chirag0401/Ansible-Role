@@ -1,0 +1,8 @@
+--- #Task and Target
+- hosts: all
+  user: ubuntu
+  become: yes
+  connection: ssh
+  tasks:
+  - name: Install NGINX on Client
+    action: apt name=nginx state=present

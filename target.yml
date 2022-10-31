@@ -1,0 +1,6 @@
+--- #Target YAML
+- hosts: all
+  user: ubuntu
+  become: yes
+  connection: ssh
+  gather_facts: yes

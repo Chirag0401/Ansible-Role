@@ -1,0 +1,6 @@
+web:
+  hosts:
+    ubuntu
+  vars:
+    domain: hellowld.com
+    ansible_user: ubuntu

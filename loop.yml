@@ -1,0 +1,11 @@
+--- #Loops
+- hosts: all
+  user: ubuntu
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Add some users
+      user: name='{{item}}' state=present
+      with_items:
+        - Aadesh
+        - Raja
